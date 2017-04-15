@@ -1,4 +1,10 @@
 <?php
+/**
+ * Project: cart
+ * User: dylan
+ * Date: 4/15/2017
+ * Time: 9:33 AM
+ */
 
 namespace Leaphly\Cart\Model;
 
@@ -6,11 +12,7 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 
-/**
- * @author Simone Di Maulo <toretto460@gmail.com>
- */
-//abstract class Item implements ItemInterface
-class Item implements ItemInterface
+trait ItemTrait
 {
     /**
      * @var string $id

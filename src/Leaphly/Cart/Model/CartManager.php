@@ -70,8 +70,6 @@ abstract class CartManager implements CartManagerInterface
      */
     public function addItem(CartInterface $cart, ItemInterface $item)
     {
-        $return = $cart->addItem($item);
-
-        return $return;
+        return $cart->addItem($item);
     }
 }

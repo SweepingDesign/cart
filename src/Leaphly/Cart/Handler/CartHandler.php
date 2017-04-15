@@ -41,6 +41,11 @@ class CartHandler implements CartHandlerInterface
     protected $eventFactory;
 
     /**
+     * @var \Leaphly\Cart\Transition\TransitionInterface
+     */
+    protected $finiteState;
+
+    /**
      * @param CartManagerInterface     $cartManager
      * @param FactoryInterface         $formFactory
      * @param TransitionInterface      $finiteState
@@ -107,7 +112,7 @@ class CartHandler implements CartHandlerInterface
         $cart = $event->getCart();
         $this->applyWriteTransition($cart);
 
-        return $this->processForm($cart, $parameters, "POST");
+        return $this->processForm($cart, $parameters, 'POST');
     }
 
     /**
@@ -125,7 +130,7 @@ class CartHandler implements CartHandlerInterface
         $cart = $event->getCart();
         $this->applyWriteTransition($cart);
 
-        return $this->processForm($cart, $parameters, "PUT");
+        return $this->processForm($cart, $parameters, 'PUT');
     }
 
     /**
@@ -143,7 +148,7 @@ class CartHandler implements CartHandlerInterface
         $cart = $event->getCart();
         $this->applyWriteTransition($cart);
 
-        return $this->processForm($cart, $parameters, "PATCH");
+        return $this->processForm($cart, $parameters, 'PATCH');
     }
 
     /**
@@ -154,9 +159,9 @@ class CartHandler implements CartHandlerInterface
      * @param String        $method
      *
      * @throws \Leaphly\Cart\Exception\InvalidFormException
-     * @return \Symfony\Component\Form\FormInterface
+     * @return CartInterface|\Symfony\Component\Form\FormInterface
      */
-    private function processForm(CartInterface $cart, array $parameters, $method = "PUT")
+    private function processForm(CartInterface $cart, array $parameters, $method = 'PUT')
     {
         $form = $this->formFactory->createForm(array('method' => $method), $cart);
         $form->submit($parameters, false);
@@ -167,14 +172,14 @@ class CartHandler implements CartHandlerInterface
             $event = $this->eventFactory->getEvent($cart, $parameters);
 
             $this->dispatcher->dispatch(
-                $method == "POST" ? LeaphlyCartEvents::CART_CREATE_SUCCESS : LeaphlyCartEvents::CART_EDIT_SUCCESS,
+                $method === 'POST' ? LeaphlyCartEvents::CART_CREATE_SUCCESS : LeaphlyCartEvents::CART_EDIT_SUCCESS,
                 $event
             );
             $cart = $event->getCart();
             $this->cartManager->updateCart($cart);
 
             $this->dispatcher->dispatch(
-                $method == "POST" ? LeaphlyCartEvents::CART_CREATE_COMPLETED : LeaphlyCartEvents::CART_EDIT_COMPLETED,
+                $method === 'POST' ? LeaphlyCartEvents::CART_CREATE_COMPLETED : LeaphlyCartEvents::CART_EDIT_COMPLETED,
                 $this->eventFactory->getEvent($cart)
             );
 

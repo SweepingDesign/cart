@@ -11,6 +11,8 @@ class SimpleProductFamilyProvider implements ProductFamilyProviderInterface
 {
     /**
      * {inheritdoc}
+     * @param array $parameters
+     * @return mixed|string
      */
     public function getProductFamily(array $parameters)
     {

@@ -2,10 +2,14 @@
 
 namespace Leaphly\Cart\Tests\Handler;
 
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Serializer;
 use Leaphly\Cart\Event\CartEventFactory;
 use Leaphly\Cart\LeaphlyCartEvents;
 use Leaphly\Cart\Handler\CartHandler;
+use Leaphly\Cart\Listener\ItemStrategySerializerListener;
 use Leaphly\Cart\Tests\TestCart;
+use Leaphly\Cart\Tests\TestCartItem;
 
 /**
  *
@@ -178,6 +182,8 @@ class CartHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $startingPrice=100.00;
 
+
+        $cart = new TestCart();
         $form = $this->getMock('Leaphly\Cart\Tests\FormInterface');
         $form->expects($this->once())
             ->method('submit')
@@ -226,6 +232,22 @@ class CartHandlerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('\Leaphly\Cart\Model\CartInterface', $cartAssert);
 
+    }
+
+    public function testSerialization()
+    {
+        date_default_timezone_set('UTC');
+        $serializer = \JMS\Serializer\SerializerBuilder::create()
+            ->configureListeners(function(EventDispatcher $dispatcher) {
+                $dispatcher->addSubscriber(new ItemStrategySerializerListener());
+            })
+            ->build();
+        $cart = new TestCart();
+
+        $cart->setId('test');
+        $serialized = $serializer->serialize($cart, 'json');
+        $deserialized = $serializer->deserialize($serialized, TestCart::class, 'json');
+        $this->assertEquals($cart, $deserialized);
     }
 
     public function getPatchParameters()

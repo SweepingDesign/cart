@@ -23,6 +23,11 @@ class ClassNameProductFamilyProvider implements ProductFamilyProviderInterface
     protected $class;
 
     /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository
+     */
+    protected $repository;
+
+    /**
      * @param ObjectManager $om
      * @param $class
      */

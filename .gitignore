@@ -2,3 +2,5 @@ composer.lock
 phpunit.xml
 Tests/autoload.php
 vendor/*
+.idea
+phpunit

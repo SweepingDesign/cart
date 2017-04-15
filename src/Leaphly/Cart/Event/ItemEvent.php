@@ -2,7 +2,6 @@
 
 namespace Leaphly\Cart\Event;
 
-use Symfony\Component\EventDispatcher\Event;
 use Leaphly\Cart\Model\ItemInterface;
 use Leaphly\Cart\Model\CartInterface;
 

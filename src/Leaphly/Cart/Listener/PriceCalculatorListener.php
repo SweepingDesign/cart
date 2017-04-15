@@ -2,8 +2,8 @@
 
 namespace Leaphly\Cart\Listener;
 
-use Leaphly\Cart\Event\CartEvent;
 use Leaphly\Cart\Calculator\PriceCalculatorInterface;
+use Leaphly\Cart\Event\CartEventInterface;
 
 /**
  * Listener that calculate the price when Cart or Item are modified.
@@ -16,6 +16,7 @@ class PriceCalculatorListener
      * @var string
      */
     private $class;
+
     /**
      * @var \Leaphly\Cart\Calculator\PriceCalculatorInterface
      */
@@ -34,9 +35,9 @@ class PriceCalculatorListener
     /**
      * Calculate the cart price.
      *
-     * @param CartEvent $event
+     * @param CartEventInterface $event
      */
-    public function calculatePrice(CartEvent $event)
+    public function calculatePrice(CartEventInterface $event)
     {
         $this->priceCalculator->calculatePrice($event->getCart());
     }

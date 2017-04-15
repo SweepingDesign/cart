@@ -5,21 +5,9 @@ namespace Leaphly\Cart\Event;
 use Symfony\Component\EventDispatcher\Event;
 use Leaphly\Cart\Model\CartInterface;
 
-/**
- * The Cart Event
- *
- * @author Claudio D'Alicandro <claudio.dalicandro@gmail.com>
- */
-class CartEvent extends Event
+class CartEvent extends Event implements CartEventInterface
 {
-    /**
-     * @var \Leaphly\Cart\Model\CartInterface
-     */
-    protected $cart;
-    /**
-     * @var array
-     */
-    protected $parameters;
+    use CartEventTrait;
 
     public function __construct(CartInterface $cart, array $parameters = null)
     {
@@ -27,27 +15,5 @@ class CartEvent extends Event
         $this->parameters = $parameters;
     }
 
-    /**
-     * @return CartInterface
-     */
-    public function getCart()
-    {
-        return $this->cart;
-    }
 
-    /**
-     * @return array
-     */
-    public function getParameters()
-    {
-        return $this->parameters;
-    }
-
-    /**
-     * @param array $parameters
-     */
-    public function setParameters($parameters)
-    {
-        $this->parameters = $parameters;
-    }
 }

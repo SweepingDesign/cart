@@ -29,6 +29,8 @@ class FormFactory implements FactoryInterface
      */
     private $validationGroups;
 
+    private $class;
+
     /**
      * @param FormFactoryInterface $formFactory
      * @param $name

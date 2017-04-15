@@ -3,6 +3,7 @@
 namespace Leaphly\Cart\Calculator;
 
 use Leaphly\Cart\Model\CartInterface;
+use Leaphly\Cart\Model\ItemInterface;
 
 /**
  * This Calculate the prices given a cart.
@@ -19,6 +20,7 @@ class PriceCalculator implements PriceCalculatorInterface
         $price = 0;
         $finalPrice = 0;
 
+        /** @var ItemInterface $item */
         foreach ($cart->getItems() as $item) {
             $price = bcadd($price, $item->getPrice(), 2);
             $finalPrice = bcadd($finalPrice, $item->getFinalPrice(), 2);

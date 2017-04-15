@@ -24,7 +24,7 @@ class ItemEventFactory
      * @param ItemInterface $item
      * @param array         $parameters
      *
-     * @return \Symfony\Component\EventDispatcher\Event
+     * @return ItemEvent
      */
     public function getEvent(CartInterface $cart, ItemInterface $item, array $parameters = null)
     {

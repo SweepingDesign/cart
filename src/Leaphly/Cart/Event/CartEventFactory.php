@@ -22,7 +22,7 @@ class CartEventFactory
      * @param CartInterface $cart
      * @param array         $parameters
      *
-     * @return \Symfony\Component\EventDispatcher\Event
+     * @return CartEventInterface
      */
     public function getEvent(CartInterface $cart, array $parameters = null)
     {

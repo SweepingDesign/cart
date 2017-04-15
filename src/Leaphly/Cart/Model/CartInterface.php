@@ -103,7 +103,7 @@ interface CartInterface
     /**
      * Gets the items granted to the cart.
      *
-     * @return \Traversable
+     * @return \Traversable<ItemInterface>
      */
     public function getItems();
 
@@ -130,7 +130,7 @@ interface CartInterface
      *
      * @param ItemInterface $item
      *
-     * @return self
+     * @return Boolean
      */
     public function addItem(ItemInterface $item);
 

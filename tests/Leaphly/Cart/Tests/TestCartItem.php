@@ -4,29 +4,25 @@ namespace Leaphly\Cart\Tests;
 
 use JMS\Serializer\Annotation as Serializer;
 use Leaphly\Cart\Model\Cart;
+use Leaphly\Cart\Model\Item;
+use Leaphly\Cart\Model\ItemInterface;
+use Leaphly\Cart\Model\ItemTrait;
 
 /**
  *
- * @author Giulio De Donato <liuggio@gmail.com>
+ * @author Dylan Oliver <dylan@sweepingdesign.com>
  * @package Leaphly\Cart\Tests
  */
-class TestCart extends Cart
+class TestCartItem extends Item
 {
+//    use ItemTrait;
+
     /**
      * @param $id
      */
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @Serializer\VirtualProperty()
-     * @return string
-     */
-    public function getDong()
-    {
-        return 'dong';
     }
 
 }

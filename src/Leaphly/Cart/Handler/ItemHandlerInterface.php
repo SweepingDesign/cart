@@ -4,20 +4,22 @@ namespace Leaphly\Cart\Handler;
 
 use Leaphly\Cart\Model\CartInterface;
 use Leaphly\Cart\Model\ItemInterface;
+use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
 /**
  * Interface that the ProductHandler must respect
  *
  * @author Giulio De Donato <liuggio@gmail.com>
  */
-Interface ItemHandlerInterface
+interface ItemHandlerInterface
 {
     /**
      * @param CartInterface $cart
      * @param array         $parameters
      *
      * @return ItemInterface
-     * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
+     * @throws
+     * @throws NotAcceptableHttpException
      *
      * @api
      */
@@ -29,7 +31,7 @@ Interface ItemHandlerInterface
      * @param array         $parameters
      *
      * @return ItemInterface
-     * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
+     * @throws NotAcceptableHttpException
      *
      * @api
      */

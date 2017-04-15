@@ -3,7 +3,6 @@
 namespace Leaphly\Cart\Handler;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 use PUGX\Godfather\Godfather;
@@ -90,6 +89,7 @@ class CartItemHandler implements CartItemHandlerInterface
             throw new NotAcceptableHttpException('Impossible to fetch product Family from Request.');
         }
 
+        /** @var CartItemHandlerInterface $cartItemHandler */
         $cartItemHandler = $this->strategy->getItemHandler($productFamily);
         $item = $cartItemHandler->postItem($cart, $parameters);
         $this->cartManager->addItem($cart, $item);
@@ -123,6 +123,7 @@ class CartItemHandler implements CartItemHandlerInterface
             throw new NotAcceptableHttpException('Impossible to fetch product Family from Request.');
         }
 
+        /** @var CartItemHandlerInterface $cartItemHandler */
         $cartItemHandler = $this->strategy->getItemHandler($productFamily);
         $item = $cartItemHandler->patchItem($cart, $item, $parameters);
 
